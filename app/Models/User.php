@@ -11,6 +11,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = 'users';
+    protected $primaryKey = 'user_id';
     protected $fillable = [
         'name',
         'email',
@@ -21,18 +23,15 @@ class User extends Authenticatable
         'avatar_url',
         'status'
     ];
-
     protected $hidden = [
         'encrypted_password',
         'remember_token',
     ];
-
     protected $casts = [
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
         'last_login_date' => 'datetime'
     ];
-
     public function getAuthPassword()
     {
         return $this->encrypted_password;

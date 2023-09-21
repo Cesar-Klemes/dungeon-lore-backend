@@ -37,4 +37,30 @@ class UserController extends Controller
 
         return response()->json(['message' => 'User registered successfully!', 'user' => $user], 201);
     }
+
+    public function login(Request $request)
+    {
+        // Validação dos dados recebidos
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 400);
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        // Verifica se o usuário existe e se a senha está correta
+        if (!$user || !Hash::check($request->password, $user->encrypted_password)) {
+            return response()->json(['message' => 'Invalid credentials'], 401);
+        }
+
+        // Gera o token para o usuário
+        $token = $user->createToken('api_token')->plainTextToken;
+
+        return response()->json(['token' => $token, 'message' => 'Login successful'], 200);
+    }
+
 }
