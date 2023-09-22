@@ -2,12 +2,13 @@ CREATE DATABASE db_dlore;
 USE db_dlore;
 
 
-CREATE TABLE user (
+CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     encrypted_password VARCHAR(255) NOT NULL,
-    creation_date DATETIME NOT NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME,
     last_login_date DATETIME,
     bio TEXT,
     avatar_url VARCHAR(255),
@@ -20,7 +21,6 @@ CREATE TABLE race (
     description TEXT,
     movement_speed INT
 );
-
 
 CREATE TABLE class (
     class_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -142,9 +142,9 @@ CREATE TABLE game_table (
     master_id INT,
     title VARCHAR(255) NOT NULL,
     description TEXT,
-    creation_date DATE,
+    created_at DATE,
+    updated_at DATE,
     status VARCHAR(50),
-    number_of_players INT,
     FOREIGN KEY (master_id) REFERENCES user(user_id)
 );
 

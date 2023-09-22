@@ -12,7 +12,6 @@ class GameTableController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            // Outras regras de validação
         ]);
 
         $gameTable = new GameTable($request->all());

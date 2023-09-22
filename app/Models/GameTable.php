@@ -11,5 +11,5 @@ class GameTable extends Model
 
     protected $table = 'game_table';
     protected $primaryKey = 'table_id';
-    protected $fillable = ['master_id', 'title', 'description', 'creation_date', 'status', 'number_of_players'];
+    protected $fillable = ['master_id', 'title', 'description', 'creation_date', 'status'];
 }
