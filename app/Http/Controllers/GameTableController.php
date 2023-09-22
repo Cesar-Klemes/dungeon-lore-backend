@@ -18,6 +18,7 @@ class GameTableController extends Controller
         $gameTable->master_id = Auth::id(); // Define o usuário logado como mestre
         $gameTable->title = $request->title;
         $gameTable->description = $request->description;
+        $gameTable->status = $request->status;
         $gameTable->save();
 
         return response()->json($gameTable, 201);
